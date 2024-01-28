@@ -5,6 +5,10 @@ export class GameObject {
         this.components = [];
     }
 
+    hasComponent(componentType) {
+        return this.components.find(component => component instanceof componentType);
+    }
+
     addComponent(component) {
         this.components.push(component);
         if (component.camera) {

@@ -1,8 +1,9 @@
 import * as THREE from 'three';
+import { GameComponent } from "./GameComponent";
 
-export class CameraComponent {
+export class CameraComponent extends GameComponent {
   constructor(gameObject, fov = 75, aspect = window.innerWidth / window.innerHeight, near = 0.1, far = 1000) {
-    this.gameObject = gameObject;
+    super(gameObject);
     this.camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
     this.updateCameraPosition();
   }

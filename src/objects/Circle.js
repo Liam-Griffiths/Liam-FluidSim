@@ -3,13 +3,11 @@ import * as THREE from 'three';
 import { CirclePhysics } from "../base/CirclePhysics";
 
 export class Circle extends GameObject {
-    constructor(game, x, y, radius, mass, initVelocity = {x: 0, y: 0}, friction, dampening, gravity) {
+    constructor(game, x, y, radius, color = 0xff0000) {
         super(game, x, y);
-        this.radius = radius;
-        this.color = 0xff0000; // color (red)
 
-        this.circlePhysics = new CirclePhysics(this, this.game, gravity, dampening, friction, initVelocity, mass);
-        this.addComponent(this.circlePhysics)
+        this.radius = radius;
+        this.color = color;
 
         this.createMesh();
     }

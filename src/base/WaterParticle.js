@@ -1,12 +1,6 @@
 import { GameComponent } from "./GameComponent";
 
-/*
-*
-* Simple 2d circle physics
-*
-*/
-
-export class CirclePhysics extends GameComponent {
+export class WaterParticle extends GameComponent {
   constructor(gameObject, game, gravity = -9.8, dampening = 0.85, friction = 0.9, velocity = { x: 0, y: 0 }, mass = 1) {
     super(gameObject);
     this.game = game;
@@ -77,7 +71,7 @@ export class CirclePhysics extends GameComponent {
     const otherObjects = this.game.getObjects();
 
     for (const other of otherObjects) {
-      const hasComponent = other.hasComponent(CirclePhysics);
+      const hasComponent = other.hasComponent(WaterParticle);
       if (other !== this.gameObject && hasComponent) {
         const dx = this.gameObject.position.x - other.position.x;
         const dy = this.gameObject.position.y - other.position.y;
@@ -126,7 +120,7 @@ export class CirclePhysics extends GameComponent {
     this.velocity.x -= impulseScalar * component.mass * nx;
     this.velocity.y -= impulseScalar * component.mass * ny;
     component.velocity.x += impulseScalar * this.mass * nx;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         component.velocity.y += impulseScalar * this.mass * ny;
+    component.velocity.y += impulseScalar * this.mass * ny;
   }
 
 }
