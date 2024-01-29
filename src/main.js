@@ -4,6 +4,7 @@ import { Game } from "./Game";
 import { GameObject } from "./base/GameObject";
 import { CameraComponent } from "./base/CameraComponent";
 import { FluidManager } from "./FluidManager";
+import GUI from "lil-gui";
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -15,6 +16,8 @@ const game = new Game(scene, renderer);
 
 const init = () => {
 
+  const gui = new GUI();
+  gui.add( game, 'togglePause' );
 
   const cameraObject = new GameObject(game, 0, 0, 5); // Position the camera
   const cameraComponent = new CameraComponent(cameraObject);
@@ -29,6 +32,13 @@ const init = () => {
   });
 
   const fluidManager = new FluidManager(game, 0, 0 , 30, 10, 0.15);
+  fluidManager.init();
+  gui.add( fluidManager, 'horizontal' );
+  gui.add( fluidManager, 'vertical' );
+  gui.add( fluidManager, 'spacing' );
+  gui.add( fluidManager, 'radius' );
+  gui.add( fluidManager, 'init' );
+
 };
 
 if (WebGL.isWebGLAvailable()) {

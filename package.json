@@ -8,6 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "lil-gui": "^0.19.1",
     "prettier": "^3.2.4",
     "three": "^0.160.1"
   },

@@ -11,12 +11,21 @@ export class FluidManager {
     this.horizontal = horizontal;
     this.vertical = vertical;
     this.spacing = spacing;
+    this.waterParticles = [];
+    this.mass = 1
+  }
+
+  init(){
+
+    for (let wp of this.waterParticles) {
+      this.game.removeObject(wp);
+    }
 
     this.startX = this.x - (this.horizontal * (this.radius + this.spacing)) / 2;
     this.startY = this.y - (this.vertical * (this.radius + this.spacing)) / 2;
 
-    for (let i = 0; i < vertical; i++) {
-      for (let j = 0; j < horizontal; j++) {
+    for (let i = 0; i < this.vertical; i++) {
+      for (let j = 0; j < this.horizontal; j++) {
         const newX = this.startX + j * (this.radius + this.spacing);
         const newY = this.startY + i * (this.radius + this.spacing);
 
@@ -25,7 +34,7 @@ export class FluidManager {
           y: (Math.random() - 0.5) * 1.2,
         };
 
-        const circle = new Circle(game, newX, newY, this.radius);
+        const circle = new Circle(this.game, newX, newY, this.radius);
         const waterParticle = new WaterParticle(
           circle,
           this.game,
@@ -33,10 +42,11 @@ export class FluidManager {
           undefined,
           undefined,
           initVelocity,
-          1,
+          this.mass,
         );
         circle.addComponent(waterParticle);
-        game.addObject(circle);
+        this.game.addObject(circle);
+        this.waterParticles.push(circle);
       }
     }
   }
