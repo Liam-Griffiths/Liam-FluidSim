@@ -7,6 +7,11 @@ export class Game {
     this.objects = [];
     this.clock = new THREE.Clock();
     this.activeCamera = null;
+    this.isPaused = true;
+  }
+
+  togglePause() {
+    this.isPaused = !this.isPaused;
   }
 
   setActiveCamera(camera) {
@@ -33,7 +38,6 @@ export class Game {
     }
   }
 
-
   getSceneBounds() {
     if (this.activeCamera.isOrthographicCamera) {
       const height = this.activeCamera.top - this.activeCamera.bottom;
@@ -47,7 +51,6 @@ export class Game {
     }
   }
 
-
   start() {
     this.run();
   }
@@ -56,8 +59,10 @@ export class Game {
     requestAnimationFrame(() => this.run());
     const deltaTime = this.clock.getDelta();
 
-    for (const gameObject of this.objects) {
-      gameObject.update(deltaTime);
+    if (!this.isPaused) {
+      for (const gameObject of this.objects) {
+        gameObject.update(deltaTime);
+      }
     }
 
     if (this.activeCamera) {
